@@ -5,7 +5,7 @@ status = 'processed'
 created_date = '22.12.2024'
 issue_date = '31.12.2024'
 
-print('Описание переменной: ', username)
+print('Имя пользователя: ', username)
 print('Заголовок: ', title)
 print('Описание: ', content)
 print('Статус: ', status)
