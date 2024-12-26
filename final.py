@@ -9,5 +9,7 @@ title2 = input("введите второй заголовок: ")
 title3 = input("введите третий заголовок: ")
 list_of_titles = [title1, title2, title3]
 
-note = [username, content, status, created_date, issue_date, list_of_titles]
-print("Поля заметки в виде списка: ", note)
+note = {'Имя пользователя': username, 'Описание': content, 'Статус': status,
+        'Дата создания': created_date, 'Дата истечения': issue_date,
+        'Список заголовков': list_of_titles}
+print("Поля заметки в виде словаря: ", note)
