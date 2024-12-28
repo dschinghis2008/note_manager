@@ -1,8 +1,8 @@
 username = input("введите имя пользователя: ")
 content = input("введите описание: ")
 status = input("введите статус: ")
-created_date = input('введите дату создания заметки в формате "dd.mm.yyyy": ')
-issue_date = input('введите дату истечения заметки в формате "dd.mm.yyyy": ')
+created_date = input('введите дату создания заметки в формате "dd.mm": ')
+issue_date = input('введите дату истечения заметки в формате "dd.mm": ')
 
 title1 = input("введите первый заголовок: ")
 title2 = input("введите второй заголовок: ")
