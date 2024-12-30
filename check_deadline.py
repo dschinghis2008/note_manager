@@ -12,16 +12,16 @@ def get_issue_date():
         dt_format = '%d.%m.%y'
     elif f == '2':
         dt_format = '%Y-%m-%d'
-    elif f=='3':
-        dt_format=input('формат:')
+    elif f == '3':
+        dt_format = input('формат:')
     else:
         dt_format = '%d.%m.%y'
 
     str_dt = input('Введите дату истечения заметки в формате "' + dt_format + '":')
     try:
-        dt=datetime.datetime.strptime(str_dt, dt_format)
+        dt = datetime.datetime.strptime(str_dt, dt_format)
     except:
-        print('Вероятно неверный формат даты истечения заметки: ',dt_format)
+        print('Вероятно неверный формат даты истечения заметки: ', dt_format)
     return dt
 
 
