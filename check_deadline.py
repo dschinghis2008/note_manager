@@ -20,7 +20,7 @@ def get_issue_date():
     str_dt = input('Введите дату истечения заметки в формате "' + dt_format + '":')
     try:
         dt = datetime.datetime.strptime(str_dt, dt_format)
-    except:
+    except ValueError:
         print('Вероятно неверный формат даты истечения заметки: ', dt_format)
     return dt
 
