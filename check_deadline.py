@@ -6,17 +6,23 @@ def get_now():
 
 
 def get_issue_date():
-    dt_format = ''
-    f = input('Выберите формат даты:\n1 "dd.mm.yy"\n2 "yyyy-mm-dd"')
+    dt = datetime.datetime.now()
+    f = input('Выберите формат даты:\n1 "dd.mm.yy"\n2 "yyyy-mm-dd"\n3 или задайте собственный: ')
     if f == '1':
         dt_format = '%d.%m.%y'
     elif f == '2':
         dt_format = '%Y-%m-%d'
+    elif f=='3':
+        dt_format=input('формат:')
     else:
-        dt_format = '%d.%m.%Y'
+        dt_format = '%d.%m.%y'
 
     str_dt = input('Введите дату истечения заметки в формате "' + dt_format + '":')
-    return datetime.datetime.strptime(str_dt, dt_format)
+    try:
+        dt=datetime.datetime.strptime(str_dt, dt_format)
+    except:
+        print('Вероятно неверный формат даты истечения заметки: ',dt_format)
+    return dt
 
 
 now = get_now()

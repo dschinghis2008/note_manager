@@ -1,9 +1,11 @@
+import datetime
+
 username = 'd2024'
 title = 'note manager'
 content = 'python project'
 status = 'processed'
-created_date = '22.12.2024'
-issue_date = '31.12.2024'
+created_date = datetime.datetime.strptime('22.12.2024','%d.%m.%Y')
+issue_date = datetime.datetime.strptime('31.12.2024','%d.%m.%Y')
 
 print('Имя пользователя: ', username)
 print('Заголовок: ', title)

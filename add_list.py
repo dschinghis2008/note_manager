@@ -1,9 +1,13 @@
+import datetime
+
 username = input("введите имя пользователя: ")
 title = input("введите заголовок: ")
 content = input("введите описание: ")
 status = input("введите статус: ")
-created_date = input('введите дату создания заметки в формате "dd.mm.yyyy": ')
-issue_date = input('введите дату истечения заметки в формате "dd.mm.yyyy": ')
+created_date = input('введите дату создания заметки в формате "dd.mm.yy": ')
+created_date = datetime.datetime.strptime(created_date, '%d.%m.%y')
+issue_date = input('введите дату истечения заметки в формате "dd.mm.yy": ')
+issue_date = datetime.datetime.strptime(issue_date, '%d.%m.%y')
 
 title1 = input("введите первый заголовок: ")
 title2 = input("введите второй заголовок: ")
