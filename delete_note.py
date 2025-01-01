@@ -1,25 +1,24 @@
 import datetime
 
-notes = []
-id_note = 1
-cmd = ''
+notes=[]
+id_note=1
+cmd=''
 
-
-def search_doubles():
-    result = ''
-    titles = []
-    for note in notes:
-        titles.append(note['title'])  # коллекция заголовков
-
-    set_titles = set(titles)  # коллекция заголовков без дублей
-    if len(set_titles) == len(notes):
-        result = 'Дубли не найдены'
-    else:
-        for t in set_titles:
-            if titles.count(t) > 1:
-                result = result + t + '; '
-        result = 'Повторяющиеся заголовки: ' + result
-    return result
+def delete_note(del_type,del_str):
+    set_for_remove=set()
+    index_for_remove=0
+    for n in notes:
+        if del_type=='1':
+            if n['user'].upper()==del_str.upper():
+                set_for_remove.add(index_for_remove)
+        if del_type == '2':
+            if n['title'].upper()==del_str.upper():
+                set_for_remove.add(index_for_remove)
+        index_for_remove=index_for_remove+1
+    if len(set_for_remove)>0:
+        for s in set_for_remove:
+            notes.pop(s)
+    return print('Удалено ',len(set_for_remove),' позиций')
 
 
 def add_note(id_):
@@ -45,7 +44,7 @@ def add_note(id_):
 
 while cmd != '4':
     cmd = input('Выберите:\n1 - для добавления новой заметки\n2 - для просмотра списка заметок' +
-                '\n3 - для поиска дублей заголовков\n4 - для завершения работы\n')
+                '\n3 - для удаления заметки\n4 - для завершения работы\n')
     if cmd == '1':
         add_note(id_note)
         id_note = id_note + 1
@@ -59,4 +58,11 @@ while cmd != '4':
             print('Дата создания: ', n['created_date'])
             print('Дата истечения: ', n['issue_date'])
     elif cmd == '3':
-        print(search_doubles())
+        del_type=input('Выберите:\n1 - для удаления по имени пользователя\n2 - для удаления по заголовку\n3 - для '+
+                       'возврата в основное меню: ')
+        if del_type =='1':
+            del_str=input('Задайте имя пользователя: ')
+            delete_note(del_type,del_str)
+        elif del_type=='2':
+            del_str = input('Задайте заголовок: ')
+            delete_note(del_type, del_str)

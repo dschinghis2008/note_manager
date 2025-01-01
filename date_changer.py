@@ -1,5 +1,4 @@
 import datetime
-from time import strftime
 
 temp_created_date = datetime.datetime.strptime('22.12', '%d.%m')
 temp_issue_date = datetime.datetime.strptime('31.12', '%d.%m')
