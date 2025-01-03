@@ -40,15 +40,15 @@ def add_note(id_):
 
     note = {'id': id_, 'user': user, 'title': title_, 'content': content, 'status': status,
             'created_date': created_date, 'issue_date': issue_date}
-    notes.append(note)
+    return note
 
 
 while cmd != '4':
     cmd = input('Выберите:\n1 - для добавления новой заметки\n2 - для просмотра списка заметок' +
                 '\n3 - для поиска дублей заголовков\n4 - для завершения работы\n')
     if cmd == '1':
-        add_note(id_note)
-        id_note = id_note + 1
+        notes.append(add_note(id_note))
+        id_note += 1
     elif cmd == '2':
         for n in notes:
             print('№: ', n['id'])

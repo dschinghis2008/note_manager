@@ -1,24 +1,25 @@
 import datetime
 
-notes=[]
-id_note=1
-cmd=''
+notes = []
+id_note = 1
+cmd = ''
 
-def delete_note(del_type,del_str):
-    set_for_remove=set()
-    index_for_remove=0
+
+def delete_note(del_type, del_str):
+    set_for_remove = set()
+    index_for_remove = 0
     for n in notes:
-        if del_type=='1':
-            if n['user'].upper()==del_str.upper():
+        if del_type == '1':
+            if n['user'].upper() == del_str.upper():
                 set_for_remove.add(index_for_remove)
         if del_type == '2':
-            if n['title'].upper()==del_str.upper():
+            if n['title'].upper() == del_str.upper():
                 set_for_remove.add(index_for_remove)
-        index_for_remove=index_for_remove+1
-    if len(set_for_remove)>0:
+        index_for_remove = index_for_remove + 1
+    if len(set_for_remove) > 0:
         for s in set_for_remove:
             notes.pop(s)
-    return print('Удалено ',len(set_for_remove),' позиций')
+    return print('Удалено ', len(set_for_remove), ' позиций')
 
 
 def add_note(id_):
@@ -58,11 +59,11 @@ while cmd != '4':
             print('Дата создания: ', n['created_date'])
             print('Дата истечения: ', n['issue_date'])
     elif cmd == '3':
-        del_type=input('Выберите:\n1 - для удаления по имени пользователя\n2 - для удаления по заголовку\n3 - для '+
-                       'возврата в основное меню: ')
-        if del_type =='1':
-            del_str=input('Задайте имя пользователя: ')
-            delete_note(del_type,del_str)
-        elif del_type=='2':
+        del_type = input('Выберите:\n1 - для удаления по имени пользователя\n2 - для удаления по заголовку\n3 - для ' +
+                         'возврата в основное меню: ')
+        if del_type == '1':
+            del_str = input('Задайте имя пользователя: ')
+            delete_note(del_type, del_str)
+        elif del_type == '2':
             del_str = input('Задайте заголовок: ')
             delete_note(del_type, del_str)
