@@ -8,8 +8,16 @@ def create_note(id_):
     status = input('Статус:')
     if user == '' or title_ == '' or content == '' or status == '':
         return print('Не должно быть пустых полей!')
-    created_date = datetime.datetime.now()  # даты по умолчанию - now и now + неделя
-    issue_date = created_date + datetime.timedelta(days=7)
+    created_date = datetime.datetime.now()
+    issue_date = input('Дата истечения заметки в формате "dd.mm.yy" или Enter чтобы задать текущую дату + неделя:')
+    if issue_date == '':
+        issue_date = created_date + datetime.timedelta(days=7)
+    else:
+        try:
+            issue_date = datetime.datetime.strptime(issue_date, '%d.%m.%y')
+        except ValueError:
+            print('Неверный формат даты истечения заметки')
+
     note = {'id': id_, 'user': user, 'title': title_, 'content': content, 'status': status,
             'created_date': created_date, 'issue_date': issue_date}
     return note
