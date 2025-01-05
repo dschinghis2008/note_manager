@@ -1,5 +1,20 @@
 import datetime
 
+def upd_issue_date(dt):
+    end = '1'
+    new_dt = ''
+    while end != '2':
+        try:
+            new_dt = input('Введите дату истечения заметки в формате "dd.mm.yy": ')
+            new_dt = datetime.datetime.strptime(new_dt, '%d.%m.%y')
+        except ValueError:
+            print('Неверный формат даты. Будет оставлено старое значение: ', dt)
+            new_dt = dt
+
+        end=input('Введите 1 чтобы продолжить обновление даты истечения\nВведите 2 чтобы завершить обновление: ')
+
+    print('Новое значение даты истечения: ', new_dt)
+    return new_dt
 
 def update_note(note):
     value = ''
@@ -21,15 +36,10 @@ def update_note(note):
             print('Такого поля нет')
 
     if not check_field:
-        return print('Update canceled')
+        return note, print('Update canceled')
 
     if field == 'issue_date':
-        try:
-            value = input('Введите дату истечения заметки в формате "dd.mm.yy": ')
-            value = datetime.datetime.strptime(value, '%d.%m.%y')
-        except ValueError:
-            print('Неверный формат даты. Будет присвоено текущее значение')
-            value = datetime.datetime.now()
+        value = upd_issue_date(note['issue_date'])
     else:
         value = input('Введите новое значение для поля: ' + field + ': ')
 
