@@ -186,7 +186,8 @@ while cmd != '6':
         id_note += 1
 
     elif cmd == '2':
-        display_notes(notes)
+        notes_for_view = notes # возможно не следует изменять исходный список. например в случае сортировки по дедлайн
+        display_notes(notes_for_view)
 
     elif cmd == '3':
         id_range = len(notes)
