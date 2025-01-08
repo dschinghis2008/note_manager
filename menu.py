@@ -31,15 +31,7 @@ def display_notes(notes):
         if sort == 'y':
             notes = sort_by_dt_issue(notes)
         for n in notes:
-            print('=====================================================')
-            print('Заметка №: ', n['id'])
-            print('Пользователь: ', n['user'])
-            print('Заголовок: ', n['title'])
-            print('Описание: ', n['content'])
-            print('Статус: ', n['status'])
-            print('Дата создания: ', n['created_date'])
-            print('Дата истечения: ', n['issue_date'])
-            print('=====================================================')
+            print_dict(n)
 
 
 def sort_by_dt_issue(list_notes):  # сортировка перестановкой
@@ -90,14 +82,17 @@ def update_note(note):
     print('Доступны для обновления следующие поля с их содержимым:')
 
     for e in note.keys():
-        print(e, ': ', note[e])
+        if e == 'id':  # id как PK не меняется, название поля лучше скрыть
+            print('заметка №', ': ', note[e], '\n********************')
+        else:
+            print(e, ': ', note[e])
 
     while not check_field:
         field = input('Введите имя поля или "stop" для выхода: ')
         if field == 'stop':
             break
         for e in note.keys():
-            if e == field:
+            if e == field and e != 'id':
                 check_field = True
                 break
         if not check_field:
@@ -169,7 +164,7 @@ now = datetime.datetime.now()
 note1 = {'id': '1', 'user': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
          'created_date': now, 'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y')}
 
-note2 = {'id': '2', 'user': 'user2', 'title': 'scoup var', 'content': 'step 4', 'status': 'inproc',
+note2 = {'id': '2', 'user': 'user2', 'title': 'scope of var', 'content': 'step 4', 'status': 'inproc',
          'created_date': now, 'issue_date': datetime.datetime.strptime('22.01.25', '%d.%m.%y')}
 
 note3 = {'id': '3', 'user': 'user3', 'title': 'search notes', 'content': 'step 5', 'status': 'close',
@@ -186,8 +181,7 @@ while cmd != '6':
         id_note += 1
 
     elif cmd == '2':
-        notes_for_view = notes # возможно не следует изменять исходный список. например в случае сортировки по дедлайн
-        display_notes(notes_for_view)
+        display_notes(notes)
 
     elif cmd == '3':
         id_range = len(notes)
@@ -195,15 +189,13 @@ while cmd != '6':
             print('Нет сохраненных заметок')
             continue
         else:
-            print('Доступны id заметок:\n')
+            print('Доступны №№ заметок:\n')
             for n in notes:
                 print(n['id'])
-            id_ = input('Введите id заметки для редактирования: ')
+            id_ = input('Введите № заметки для редактирования: ')
             i = 0
             for n in notes:
-                print('EDIT-==>>', n)
                 if n['id'] == id_:
-                    print('Call UPDATE-=>')
                     notes[i] = update_note(notes[i])
                 i += 1
 

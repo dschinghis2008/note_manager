@@ -36,7 +36,7 @@ now = datetime.datetime.now()
 note1 = {'id': '1', 'user': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
          'created_date': now, 'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y')}
 
-note2 = {'id': '2', 'user': 'user2', 'title': 'scoup var', 'content': 'step 4', 'status': 'inproc',
+note2 = {'id': '2', 'user': 'user2', 'title': 'scope of var', 'content': 'step 4', 'status': 'inproc',
          'created_date': now, 'issue_date': datetime.datetime.strptime('22.01.25', '%d.%m.%y')}
 
 note3 = {'id': '3', 'user': 'user3', 'title': 'search notes', 'content': 'step 5', 'status': 'close',
