@@ -62,7 +62,7 @@ def sort_by_dt_issue(list_notes):  # сортировка перестановк
 def upd_issue_date(dt):
     end = '1'
     new_dt = ''
-    while end != '2':
+    while end != 'stop':
         try:
             new_dt = input('Введите дату истечения заметки в формате "dd.mm.yy": ')
             new_dt = datetime.datetime.strptime(new_dt, '%d.%m.%y')
@@ -70,7 +70,7 @@ def upd_issue_date(dt):
             print('Неверный формат даты. Будет оставлено старое значение: ', dt)
             new_dt = dt
 
-        end = input('Введите 1 чтобы продолжить обновление даты истечения\nВведите 2 чтобы завершить обновление: ')
+        end = input('Введите "stop" чтобы завершить обновление даты или др. чтобы продолжить: ')
 
     print('Новое значение даты истечения: ', new_dt)
     return new_dt
@@ -104,7 +104,7 @@ def update_note(note):
     if field == 'issue_date':
         value = upd_issue_date(note['issue_date'])
     else:
-        value = input('Введите новое значение для поля: ' + field + ': ')
+        value = input('Введите новое значение для поля ' + field + ': ')
 
     note[field] = value
     return note
@@ -182,6 +182,7 @@ while cmd != '6':
 
     elif cmd == '2':
         display_notes(notes)
+        print(notes)
 
     elif cmd == '3':
         id_range = len(notes)
@@ -193,11 +194,14 @@ while cmd != '6':
             for n in notes:
                 print(n['id'])
             id_ = input('Введите № заметки для редактирования: ')
-            i = 0
+            flag_updated = False
             for n in notes:
                 if n['id'] == id_:
-                    notes[i] = update_note(notes[i])
-                i += 1
+                    n = update_note(n)
+                    flag_updated = True
+            if not flag_updated:
+                print('Такого номера нет, возврат в основное меню')
+
 
     elif cmd == '4':
         del_type = input('Выберите:\n1 - для удаления по имени пользователя\n2 - для удаления по заголовку\n3 - для ' +
