@@ -22,6 +22,6 @@ def create_note(id_):
             'created_date': created_date, 'issue_date': issue_date}
     return note
 
-
-note = create_note(1)
-print(note)
+if __name__ == '__main__':
+    note = create_note(1)
+    print(note)

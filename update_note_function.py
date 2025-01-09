@@ -22,14 +22,17 @@ def update_note(note):
     print('Доступны для обновления следующие поля с их содержимым:')
 
     for e in note.keys():
-        print(e, ': ', note[e])
+        if e == 'id':  # id как PK не меняется, название поля лучше скрыть
+            print('заметка №', ': ', note[e], '\n********************')
+        else:
+            print(e, ': ', note[e])
 
     while not check_field:
         field = input('Введите имя поля или "stop" для выхода: ')
         if field == 'stop':
             break
         for e in note.keys():
-            if e == field:
+            if e == field and e != 'id':
                 check_field = True
                 break
         if not check_field:
@@ -41,13 +44,13 @@ def update_note(note):
     if field == 'issue_date':
         value = upd_issue_date(note['issue_date'])
     else:
-        value = input('Введите новое значение для поля: ' + field + ': ')
+        value = input('Введите новое значение для поля ' + field + ': ')
 
     note[field] = value
     return note
 
-
-note = {'username': 'user', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
-        'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y')}
-print('Исходная заметка:\n', note)
-print('После обновления:\n', update_note(note))
+if __name__ == '__main__':
+    note = {'username': 'user', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
+            'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y')}
+    print('Исходная заметка:\n', note)
+    print('После обновления:\n', update_note(note))
