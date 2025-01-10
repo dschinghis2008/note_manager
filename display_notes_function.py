@@ -37,7 +37,7 @@ def display_notes(notes):
         for n in notes:
             print('=====================================================')
             print('Заметка №: ', n['id'])
-            print('Пользователь: ', n['user'])
+            print('Пользователь: ', n['username'])
             print('Заголовок: ', n['title'])
             print('Описание: ', n['content'])
             print('Статус: ', n['status'])
@@ -48,13 +48,13 @@ def display_notes(notes):
 
 if __name__ == '__main__':
     now = datetime.datetime.now()
-    note1 = {'id': '1', 'user': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
+    note1 = {'id': '1', 'username': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
              'created_date': now, 'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y')}
 
-    note2 = {'id': '2', 'user': 'user2', 'title': 'grade1', 'content': 'step 4', 'status': 'inproc',
+    note2 = {'id': '2', 'username': 'user2', 'title': 'grade1', 'content': 'step 4', 'status': 'inproc',
              'created_date': now, 'issue_date': datetime.datetime.strptime('22.01.25', '%d.%m.%y')}
 
-    note3 = {'id': '3', 'user': 'user3', 'title': 'grade', 'content': 'step 5', 'status': 'close',
+    note3 = {'id': '3', 'username': 'user3', 'title': 'grade', 'content': 'step 5', 'status': 'close',
              'created_date': now, 'issue_date': datetime.datetime.strptime('12.01.25', '%d.%m.%y')}
 
     notes = []

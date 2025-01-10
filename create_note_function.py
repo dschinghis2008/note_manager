@@ -18,7 +18,7 @@ def create_note(id_):
         except ValueError:
             print('Неверный формат даты истечения заметки')
 
-    note = {'id': id_, 'user': user, 'title': title_, 'content': content, 'status': status,
+    note = {'id': id_, 'username': user, 'title': title_, 'content': content, 'status': status,
             'created_date': created_date, 'issue_date': issue_date}
     return note
 
