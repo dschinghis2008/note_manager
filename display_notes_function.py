@@ -20,7 +20,6 @@ def sort_by_dt_issue(list_notes):  # сортировка перестановк
         if flag_sort:
             list_notes[index_min] = list_notes[index]
             list_notes[index] = note
-        # print(index, notes, min)
         index += 1
         flag_sort = False
 
