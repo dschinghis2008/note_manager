@@ -1,5 +1,6 @@
 import datetime
 
+
 def upd_issue_date(dt):
     end = '1'
     new_dt = ''
@@ -11,21 +12,22 @@ def upd_issue_date(dt):
             print('Неверный формат даты. Будет оставлено старое значение: ', dt)
             new_dt = dt
 
-        end=input('Введите "end" чтобы завершить обновление или др. чтобы продолжить: ')
+        end = input('Введите "end" чтобы завершить обновление или др. чтобы продолжить: ')
 
     print('Новое значение даты истечения: ', new_dt)
     return new_dt
+
 
 def update_note(note):
     value = ''
     check_field = False
     print('Доступны для обновления следующие поля с их содержимым:')
 
-    for e in note.keys():
-        if e == 'id':  # id как PK не меняется, название поля лучше скрыть
-            print('заметка №', ': ', note[e], '\n********************')
+    for key, val in note.items():
+        if key == 'id':  # id как PK не меняется, название поля лучше скрыть
+            print('заметка №', ': ', val, '\n********************')
         else:
-            print(e, ': ', note[e])
+            print(key, ': ', val)
 
     while not check_field:
         field = input('Введите имя поля или "stop" для выхода: ')
@@ -49,8 +51,9 @@ def update_note(note):
     note[field] = value
     return note
 
+
 if __name__ == '__main__':
-    note = {'username': 'user', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
+    note = {'id': '1', 'username': 'user', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
             'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y')}
     print('Исходная заметка:\n', note)
     print('После обновления:\n', update_note(note))
