@@ -4,7 +4,7 @@ import datetime
 def load_notes_from_file(file):
     source_list = file.readlines()
     notes = []
-    # инициируем поля сущности
+    # инициируем поля
     id = ''
     username = ''
     title = ''
@@ -43,7 +43,13 @@ try:
     notes = load_notes_from_file(file)
     print(notes)
 except FileExistsError:
-    print('Файл не найден')
+    print('Файл не найден в текущей директории, будет создан новый')
+    file = open('notes.txt', 'w')
+    file.close()
+except UnicodeDecodeError:
+    print('Файл поврежден или не является текстовым')
+except PermissionError:
+    print('Отсутствуют права доступа к файлу')
 finally:
     if not file.closed:
         file.close()

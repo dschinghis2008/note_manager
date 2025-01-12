@@ -35,20 +35,19 @@ def search_notes(notes, keyword=None, status=None):
 
 
 if __name__ == '__main__':
-    now = datetime.datetime.now()
-    note1 = {'id': '1', 'username': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
-             'created_date': now, 'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y')}
-
-    note2 = {'id': '2', 'username': 'user2', 'title': 'scope of var', 'content': 'step 4', 'status': 'inproc',
-             'created_date': now, 'issue_date': datetime.datetime.strptime('22.01.25', '%d.%m.%y')}
-
-    note3 = {'id': '3', 'username': 'user3', 'title': 'search notes', 'content': 'step 5', 'status': 'close',
-             'created_date': now, 'issue_date': datetime.datetime.strptime('12.01.25', '%d.%m.%y')}
+    now = datetime.datetime.now().date()
 
     notes = []
     print('Тестирование функции поиска заметок\n1 - пустой список')
     search_notes(notes)
-    notes = [note1, note2, note3]
+    notes = [
+        {'id': '1', 'username': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
+         'created_date': now, 'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y')},
+        {'id': '2', 'username': 'user2', 'title': 'scope of var', 'content': 'step 4', 'status': 'inproc',
+         'created_date': now, 'issue_date': datetime.datetime.strptime('22.01.25', '%d.%m.%y')},
+        {'id': '3', 'username': 'user3', 'title': 'search notes', 'content': 'step 5', 'status': 'close',
+         'created_date': now, 'issue_date': datetime.datetime.strptime('12.01.25', '%d.%m.%y')}
+    ]
     print('2 - список из 3-х заметок с пустыми строками заголовка и статуса')
     search_notes(notes)
     print('3 - список из 3-х заметок с пустой строкой статуса. Ожидается нахождение заметки №2')

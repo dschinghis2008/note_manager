@@ -28,4 +28,5 @@ file = open('notes.txt', 'w', encoding='utf-8')
 try:
     save_notes_to_file(notes, file)
 finally:
-    file.close()
+    if not file.closed:
+        file.close()
