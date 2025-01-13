@@ -12,20 +12,28 @@ def save_notes_to_file(notes, file):
         file.write(f"Дата истечения: {n['issue_date']}\n==========\n")
 
 
-
 now = datetime.date.today()
-note1 = {'id': '1', 'username': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
-         'created_date': now, 'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y').date()}
 
-note2 = {'id': '2', 'username': 'user2', 'title': 'grade1', 'content': 'step 4', 'status': 'inproc',
-         'created_date': now, 'issue_date': datetime.datetime.strptime('22.01.25', '%d.%m.%y').date()}
+notes = [
+    {'id': '1', 'username': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
+     'created_date': now, 'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y').date()},
+    {'id': '2', 'username': 'user2', 'title': 'grade1', 'content': 'step 4', 'status': 'inproc',
+     'created_date': now, 'issue_date': datetime.datetime.strptime('22.01.25', '%d.%m.%y').date()},
+    {'id': '3', 'username': 'user3', 'title': 'grade', 'content': 'step 5', 'status': 'close',
+     'created_date': now, 'issue_date': datetime.datetime.strptime('12.01.25', '%d.%m.%y').date()}
+]
+file = None
 
-note3 = {'id': '3', 'username': 'user3', 'title': 'grade', 'content': 'step 5', 'status': 'close',
-         'created_date': now, 'issue_date': datetime.datetime.strptime('12.01.25', '%d.%m.%y').date()}
-
-notes = [note1, note2, note3]
-file = open('notes.txt', 'w', encoding='utf-8')
 try:
+    file = open('notes.txt', 'w', encoding='utf-8')
+    save_notes_to_file(notes, file)
+    file.close()
+
+    notes = [
+        {'id': '100', 'username': 'user100', 'title': 'append mode', 'content': 'append test', 'status': 'none',
+         'created_date': now, 'issue_date': datetime.datetime.strptime('20.01.25', '%d.%m.%y').date()}
+    ]
+    file = open('notes.txt', 'a', encoding='utf-8')  # append mode
     save_notes_to_file(notes, file)
 finally:
     if not file.closed:
