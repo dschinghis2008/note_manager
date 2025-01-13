@@ -80,5 +80,4 @@ def menu():
             print('Такого пункта меню пока нет')
 
 
-if __name__ == '__main__':
-    menu()
+menu()
