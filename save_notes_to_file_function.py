@@ -1,4 +1,5 @@
-import datetime
+import datetime, json
+from textwrap import indent
 
 
 def save_notes_to_file(notes, file):
@@ -15,7 +16,7 @@ def save_notes_to_file(notes, file):
 now = datetime.date.today()
 
 notes = [
-    {'id': '1', 'username': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
+    {'id': '1', 'username': 'user1', 'title': 'работа с файлами', 'content': 'step 3', 'status': 'none',
      'created_date': now, 'issue_date': datetime.datetime.strptime('10.01.25', '%d.%m.%y').date()},
     {'id': '2', 'username': 'user2', 'title': 'grade1', 'content': 'step 4', 'status': 'inproc',
      'created_date': now, 'issue_date': datetime.datetime.strptime('22.01.25', '%d.%m.%y').date()},
@@ -24,7 +25,7 @@ notes = [
 ]
 file = None
 
-try:
+try:  # write mode
     file = open('notes.txt', 'w', encoding='utf-8')
     save_notes_to_file(notes, file)
     file.close()
@@ -35,6 +36,24 @@ try:
     ]
     file = open('notes.txt', 'a', encoding='utf-8')  # append mode
     save_notes_to_file(notes, file)
+finally:
+    if not file.closed:
+        file.close()
+
+dt_create = str(now)
+dt_issue = str(now + datetime.timedelta(days=7))
+
+notes = [
+    {'id': '1', 'username': 'user1', 'title': 'работа с файлами', 'content': 'step 3', 'status': 'none',
+     'created_date': dt_create, 'issue_date': dt_issue},
+    {'id': '2', 'username': 'user2', 'title': 'grade1', 'content': 'step 4', 'status': 'inproc',
+     'created_date': dt_create, 'issue_date': dt_issue},
+    {'id': '3', 'username': 'user3', 'title': 'grade', 'content': 'step 5', 'status': 'close',
+     'created_date': dt_create, 'issue_date': dt_issue}
+]
+try:  # json
+    with open('notes.json', 'w', encoding='utf-8') as file:
+        jf = json.dump(notes, file, indent=4, ensure_ascii=False)
 finally:
     if not file.closed:
         file.close()
