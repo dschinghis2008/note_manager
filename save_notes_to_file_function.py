@@ -25,8 +25,8 @@ notes = [
 ]
 file = None
 
-try:  # write mode
-    file = open('notes.txt', 'w', encoding='utf-8')
+try:
+    file = open('notes.txt', 'w', encoding='utf-8')  # write mode
     save_notes_to_file(notes, file)
     file.close()
 
@@ -40,16 +40,16 @@ finally:
     if not file.closed:
         file.close()
 
-dt_create = str(now)
-dt_issue = str(now + datetime.timedelta(days=7))
+dt_create_str = str(now)  # для сериализации
+dt_issue_str = str(now + datetime.timedelta(days=7))
 
 notes = [
     {'id': '1', 'username': 'user1', 'title': 'работа с файлами', 'content': 'step 3', 'status': 'none',
-     'created_date': dt_create, 'issue_date': dt_issue},
+     'created_date': dt_create_str, 'issue_date': dt_issue_str},
     {'id': '2', 'username': 'user2', 'title': 'grade1', 'content': 'step 4', 'status': 'inproc',
-     'created_date': dt_create, 'issue_date': dt_issue},
+     'created_date': dt_create_str, 'issue_date': dt_issue_str},
     {'id': '3', 'username': 'user3', 'title': 'grade', 'content': 'step 5', 'status': 'close',
-     'created_date': dt_create, 'issue_date': dt_issue}
+     'created_date': dt_create_str, 'issue_date': dt_issue_str}
 ]
 try:  # json
     with open('notes.json', 'w', encoding='utf-8') as file:
