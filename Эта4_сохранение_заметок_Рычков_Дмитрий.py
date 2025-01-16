@@ -34,6 +34,8 @@ try:
     ]
     file = open('notes.txt', 'a', encoding='utf-8')  # append mode
     save_notes_to_file(notes, file)
+except PermissionError:
+    print('Отсутствуют права доступа к файлу')
 finally:
     if not file.closed:
         file.close()
