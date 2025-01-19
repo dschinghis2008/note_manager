@@ -1,5 +1,6 @@
 import datetime, json
 
+
 def save_notes_to_file(notes, file):
     for n in notes:
         file.write(f"Заметка №: {n['id']}\n")

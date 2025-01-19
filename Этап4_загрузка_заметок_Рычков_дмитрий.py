@@ -59,6 +59,8 @@ try: #десериализация, получим список словарей
     file= open('notes.json',encoding='utf-8')
     list_from_json=json.loads(file.read())
     for j in list_from_json:
+        j['created_date'] = datetime.datetime.strptime(j['created_date'],'%Y-%m-%d').date()
+        j['issue_date'] = datetime.datetime.strptime(j['issue_date'], '%Y-%m-%d').date()
         print(f'№: {j['id']}\nuser: {j['username']}\ntitle: {j['title']}\ncontent: {j['content']}\n' +
               f'status: {j['status']}\ncreate: {j['created_date']}\nissue: {j['issue_date']}\n======')
 except FileExistsError:
