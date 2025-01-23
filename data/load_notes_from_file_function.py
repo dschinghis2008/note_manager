@@ -36,20 +36,21 @@ def load_notes_from_file(file):
             notes.append(note)
     return notes
 
+if __name__ == '__main__':
 
-file = None
-try:
-    file = open('notes.txt', encoding='utf-8')
-    notes = load_notes_from_file(file)
-    print(notes)
-except FileExistsError:
-    print('Файл не найден в текущей директории, будет создан новый')
-    file = open('notes.txt', 'w')
-    file.close()
-except UnicodeDecodeError:
-    print('Файл поврежден или не является текстовым')
-except PermissionError:
-    print('Отсутствуют права доступа к файлу')
-finally:
-    if not file.closed:
+    file = None
+    try:
+        file = open('notes.txt', encoding='utf-8')
+        notes = load_notes_from_file(file)
+        print(notes)
+    except FileExistsError:
+        print('Файл не найден в текущей директории, будет создан новый')
+        file = open('notes.txt', 'w')
         file.close()
+    except UnicodeDecodeError:
+        print('Файл поврежден или не является текстовым')
+    except PermissionError:
+        print('Отсутствуют права доступа к файлу')
+    finally:
+        if not file.closed:
+            file.close()
