@@ -9,7 +9,7 @@ def sort_by_dt_issue(list_notes):  # сортировка перестановк
     note = {}
 
     while index < len(list_notes):
-        min_dt = datetime.datetime.strptime('01.01.2100', '%d.%m.%Y')
+        min_dt = datetime.datetime.strptime('01.01.2100', '%d.%m.%Y').date()
         for i in range(index, len(list_notes)):
             if list_notes[i]['issue_date'] < min_dt:
                 min_dt = list_notes[i]['issue_date']
