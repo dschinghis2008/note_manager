@@ -1,14 +1,13 @@
-import unittest, datetime, tests, utils.validate
+import unittest, tests
 
 from data import save, load
 from interface.display_notes_function import display_notes
-from utils.validate import get_new_id, check_dt_format, check_status
+from utils.validate import check_dt_format, check_status
+from utils.generate import get_new_id
 
 
 class UnitTestNoteManager(unittest.TestCase):
     def test_save_and_load(self):
-        #now = datetime.datetime.now().date()
-
         file = open('tst_note.txt', 'w', encoding='utf-8')
         save(tests.notes, file)
         file.close()

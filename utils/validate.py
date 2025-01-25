@@ -1,5 +1,4 @@
 from datetime import datetime
-import uuid
 
 
 def check_dt_format(date_str, format):
@@ -15,5 +14,4 @@ def check_status(status):
     else:
         return False
 
-def get_new_id():
-    return str(uuid.uuid4())
+
