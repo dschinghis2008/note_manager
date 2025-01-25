@@ -10,4 +10,4 @@ def save_to_db(note):
     con.commit()
     con.close()
 
-
+save_to_db(notes[0])
