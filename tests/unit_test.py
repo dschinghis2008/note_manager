@@ -20,16 +20,15 @@ class UnitTestNoteManager(unittest.TestCase):
         self.assertRaises(Exception, display_notes(tests.notes))
 
     def test_get_uniq_id(self):
-        self.assertGreater(len(get_new_id()),0)
+        self.assertGreater(len(get_new_id()), 0)
 
     def test_validate_format_dt(self):
-        self.assertTrue(check_dt_format('01.01.2025','%d.%m.%Y'))
+        self.assertTrue(check_dt_format('01.01.2025', '%d.%m.%Y'))
         self.assertFalse(check_dt_format('01-01-2025', '%d.%m.%Y'))
 
     def test_validate_status(self):
         self.assertTrue(check_status('new'))
         self.assertFalse(check_status('None'))
-
 
 
 if __name__ == '__main__':
