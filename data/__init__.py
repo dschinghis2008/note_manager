@@ -2,6 +2,18 @@ from .load_notes_from_file_function import load_notes_from_file as load
 from .save_notes_to_file_function import save_notes_to_file as save
 import datetime
 
+def print_notes(notes):
+    for n in notes:
+        print('=====================================================')
+        print('Заметка №: ', n['id'])
+        print('Пользователь: ', n['username'])
+        print('Заголовок: ', n['title'])
+        print('Описание: ', n['content'])
+        print('Статус: ', n['status'])
+        print('Дата создания: ', n['created_date'])
+        print('Дата истечения: ', n['issue_date'])
+        print('=====================================================')
+
 now = datetime.datetime.now().date()
 notes = [
     {'id': '1', 'username': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',

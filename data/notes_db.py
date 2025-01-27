@@ -1,6 +1,27 @@
 import sqlite3
 
-from data import notes
+from data import notes, print_notes
+
+
+def update_note(id, upd_dict, path_db):
+    try:
+        con = sqlite3.connect(path_db)
+        cur = con.cursor()
+        cur.execute('update notes set title=?, content=?, status=?, issue_date=? where id=?;',
+                    (upd_dict['title'], upd_dict['content'], upd_dict['status'], upd_dict['issue_date'], id))
+        con.commit()
+    finally:
+        con.close()
+
+
+def delete_note(id, path_db):
+    try:
+        con = sqlite3.connect(path_db)
+        cur = con.cursor()
+        cur.execute('delete from notes where id=?;', (id,))
+        con.commit()
+    finally:
+        con.close()
 
 
 def save_to_db(note):
@@ -38,6 +59,7 @@ def load_from_db():
         con.close()
 
 
+print('--==>> SAVE TO DB')
 for n in notes:
     try:
         save_to_db(n)
@@ -45,13 +67,17 @@ for n in notes:
         print(e)
         continue
 
-for n in load_from_db():
-    print('=====================================================')
-    print('Заметка №: ', n['id'])
-    print('Пользователь: ', n['username'])
-    print('Заголовок: ', n['title'])
-    print('Описание: ', n['content'])
-    print('Статус: ', n['status'])
-    print('Дата создания: ', n['created_date'])
-    print('Дата истечения: ', n['issue_date'])
-    print('=====================================================')
+print('--==>> LOAD FROM DB')
+print_notes(load_from_db())
+
+notes[0]['title'] = 'тест апдейта'
+notes[0]['content'] = 'тест апдейта'
+notes[0]['status'] = 'тест апдейта'
+notes[0]['issue_date'] = '28.02.2025'
+update_note(1, notes[0], 'db_note.db')
+print('--==>> UPDATE DB')
+print_notes(load_from_db())
+
+print('--==>> DELETE FROM DB')
+delete_note(3, 'db_note.db')
+print_notes(load_from_db())
