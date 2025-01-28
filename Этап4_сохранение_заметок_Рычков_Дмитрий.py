@@ -1,4 +1,5 @@
-import datetime, json
+import datetime
+
 
 def save_notes_to_file(notes, file):
     for n in notes:
@@ -23,25 +24,7 @@ notes = [
 ]
 
 try:
-    with open('notes.txt', 'w', encoding='utf-8') as file: # write mode
+    with open('notes.txt', 'w', encoding='utf-8') as file:  # write mode
         save_notes_to_file(notes, file)
-except FileNotFoundError:
-    print(f'{file.name} не найден, будет создан пустой файл')
-
-dt_create_str = str(now)  # для сериализации
-dt_issue_str = str(now + datetime.timedelta(days=7))
-
-notes = [
-    {'id': '1', 'username': 'user1', 'title': 'работа с файлами', 'content': 'step 3', 'status': 'none',
-     'created_date': dt_create_str, 'issue_date': dt_issue_str},
-    {'id': '2', 'username': 'user2', 'title': 'grade1', 'content': 'step 4', 'status': 'inproc',
-     'created_date': dt_create_str, 'issue_date': dt_issue_str},
-    {'id': '3', 'username': 'user3', 'title': 'grade', 'content': 'step 5', 'status': 'close',
-     'created_date': dt_create_str, 'issue_date': dt_issue_str}
-]
-try:  # json
-    with open('notes.json', 'w', encoding='utf-8') as file:
-        jf = json.dump(notes, file, indent=4, ensure_ascii=False)
-finally:
-    if not file.closed:
-        file.close()
+except Exception as e:
+    print(f'Error: {e}')

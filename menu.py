@@ -32,8 +32,7 @@ def menu():
             display_notes(notes)
 
         elif cmd == '3':
-            id_range = len(notes)
-            if id_range == 0:
+            if not notes:
                 print('Нет сохраненных заметок')
                 continue
             else:

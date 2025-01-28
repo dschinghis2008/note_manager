@@ -13,8 +13,26 @@ def print_dict(n):
     print('=====================================================')
 
 
-def search_notes(notes, keyword=None, status=None):
-    if len(notes) == 0:
+def search_notes(notes, user=None, keyword=None, status=None):
+    if not notes:
+        return print('Нет сохраненных заметок')
+    if user is not None or keyword is not None or status is not None:
+        if user is None:
+            user = '=='
+        if keyword is None:
+            keyword = '=='
+        if status is None:
+            status = '=='
+        for n in notes:
+            if user == n['username'] or keyword in n['title'] or status == n['status']:
+                print_dict(n)
+    else:
+        for n in notes:
+            print_dict(n)
+
+
+def search_notes_old(notes, keyword=None, status=None):
+    if not notes:
         return print('Нет сохраненных заметок')
 
     if keyword is None and status is None:
@@ -48,11 +66,14 @@ if __name__ == '__main__':
         {'id': '3', 'username': 'user3', 'title': 'search notes', 'content': 'step 5', 'status': 'close',
          'created_date': now, 'issue_date': datetime.datetime.strptime('12.01.25', '%d.%m.%y')}
     ]
+
     print('2 - список из 3-х заметок с пустыми строками заголовка и статуса')
     search_notes(notes)
     print('3 - список из 3-х заметок с пустой строкой статуса. Ожидается нахождение заметки №2')
-    search_notes(notes, 'var')
+    search_notes(notes, 'user2', 'var')
     print('4 - список из 3-х заметок с пустой строкой заголовка. Ожидается нахождение заметки №1')
     search_notes(notes, status='none')
     print('5 - список из 3-х заметок со всеми параметрами поиска. Ожидается нахождение заметки №3')
-    search_notes(notes, 'search', 'close')
+    search_notes(notes, 'user3', 'note', 'close')
+    print('6 - список из 3-х заметок со всеми параметрами поиска из разных заметок. Ожидается нахождение всех заметок')
+    search_notes(notes, 'user1', 'of', 'close')

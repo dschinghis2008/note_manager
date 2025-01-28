@@ -38,11 +38,18 @@ def load_notes_from_file(file):
     return notes
 
 
+file = None
 try:
     with open('notes.txt', encoding='utf-8') as file:
         notes = load_notes_from_file(file)
-        print(f'Загружено из файла: {notes}')
+        print(notes)
 except FileNotFoundError:
     print('Файл не найден в текущей директории, будет создан новый')
     file = open('notes.txt', 'w')
     file.close()
+except UnicodeDecodeError:
+    print('Файл поврежден или не является текстовым')
+except PermissionError:
+    print('Отсутствуют права доступа к файлу')
+except Exception as e:
+    print(f'Ошибка: {e}')

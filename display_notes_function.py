@@ -1,6 +1,10 @@
 import datetime
 
 
+def sort_by_dt(list_notes):
+    return sorted(list_notes, key=lambda x: x['issue_date'])
+
+
 def sort_by_dt_issue(list_notes):  # сортировка перестановкой
     index = 0
     flag_sort = False
@@ -27,12 +31,12 @@ def sort_by_dt_issue(list_notes):  # сортировка перестановк
 
 
 def display_notes(notes):
-    if len(notes) == 0:
+    if not notes:
         return print('У вас нет сохраненных заметок')
     else:
         sort = input('Введите "y" если необходимо отсортировать по дате дедлайна: ')
         if sort == 'y':
-            notes = sort_by_dt_issue(notes)
+            notes = sort_by_dt(notes)
         for n in notes:
             print('=====================================================')
             print('Заметка №: ', n['id'])

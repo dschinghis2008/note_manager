@@ -5,8 +5,8 @@
         "title": "работа с файлами",
         "content": "step 3",
         "status": "none",
-        "created_date": "2025-01-16",
-        "issue_date": "2025-01-23"
+        "created_date": "2025-01-28",
+        "issue_date": "2025-02-04"
     },
     {
         "id": "2",
@@ -14,8 +14,8 @@
         "title": "grade1",
         "content": "step 4",
         "status": "inproc",
-        "created_date": "2025-01-16",
-        "issue_date": "2025-01-23"
+        "created_date": "2025-01-28",
+        "issue_date": "2025-02-04"
     },
     {
         "id": "3",
@@ -23,7 +23,7 @@
         "title": "grade",
         "content": "step 5",
         "status": "close",
-        "created_date": "2025-01-16",
-        "issue_date": "2025-01-23"
+        "created_date": "2025-01-28",
+        "issue_date": "2025-02-04"
     }
 ]
