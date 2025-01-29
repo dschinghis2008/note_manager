@@ -23,7 +23,7 @@ def menu():
 
     while cmd != '6':
         cmd = input('Менеджер заметок\nВыберите:\n1 - для добавления новой заметки\n2 - для просмотра списка заметок' +
-             '\n3 - для редактирования заметки\n4 - для удаления заметки\n5 - для поиска заметки\n6 - для выхода\n')
+                    '\n3 - для редактирования заметки\n4 - для удаления заметки\n5 - для поиска заметки\n6 - для выхода\n')
         if cmd == '1':
             notes.append(create_note(id_note))
             id_note += 1
@@ -64,14 +64,14 @@ def menu():
                 continue
 
         elif cmd == '5':
-            title = input('Введите заголовок заметки частично или полностью (Enter чтобы не искать по заголовку):')
+            keyword = input('Введите ключевое слово (Enter чтобы не искать по ключевому слову):')
             status = input('Введите статус заметки (Enter чтобы не искать по статусу):')
-            if title == '':
-                title = None
+            if keyword == '':
+                keyword = None
             if status == '':
                 status = None
             print('Найдено:')
-            search_notes(notes, title, status)
+            search_notes(notes, keyword, status)
 
         elif cmd == '6':
             print('Работа приложения завершена')

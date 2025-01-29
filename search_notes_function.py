@@ -13,43 +13,20 @@ def print_dict(n):
     print('=====================================================')
 
 
-def search_notes(notes, user=None, keyword=None, status=None):
+def search_notes(notes, keyword=None, status=None):
     if not notes:
         return print('Нет сохраненных заметок')
-    if user is not None or keyword is not None or status is not None:
-        if user is None:
-            user = '=='
+    if keyword is not None or status is not None:
         if keyword is None:
-            keyword = '=='
+            keyword = '=*'
         if status is None:
-            status = '=='
+            status = '=*'
         for n in notes:
-            if user == n['username'] or keyword in n['title'] or status == n['status']:
+            if keyword in n['title'] or keyword in n['username'] or keyword in n['content'] or status == n['status']:
                 print_dict(n)
     else:
         for n in notes:
             print_dict(n)
-
-
-def search_notes_old(notes, keyword=None, status=None):
-    if not notes:
-        return print('Нет сохраненных заметок')
-
-    if keyword is None and status is None:
-        for n in notes:
-            print_dict(n)
-    elif status is None:
-        for n in notes:
-            if keyword in n['title']:
-                print_dict(n)
-    elif keyword is None:
-        for n in notes:
-            if status == n['status']:
-                print_dict(n)
-    else:
-        for n in notes:
-            if keyword in n['title'] and status == n['status']:
-                print_dict(n)
 
 
 if __name__ == '__main__':
@@ -67,13 +44,15 @@ if __name__ == '__main__':
          'created_date': now, 'issue_date': datetime.datetime.strptime('12.01.25', '%d.%m.%y')}
     ]
 
-    print('2 - список из 3-х заметок с пустыми строками заголовка и статуса')
+    print('2 - список из 3-х заметок с пустыми keyword и статуса')
     search_notes(notes)
     print('3 - список из 3-х заметок с пустой строкой статуса. Ожидается нахождение заметки №2')
-    search_notes(notes, 'user2', 'var')
-    print('4 - список из 3-х заметок с пустой строкой заголовка. Ожидается нахождение заметки №1')
+    search_notes(notes, 'user2')
+    print('4 - список из 3-х заметок с пустой строкой keyword. Ожидается нахождение заметки №1')
     search_notes(notes, status='none')
     print('5 - список из 3-х заметок со всеми параметрами поиска. Ожидается нахождение заметки №3')
-    search_notes(notes, 'user3', 'note', 'close')
+    search_notes(notes, '5', 'xxx')
     print('6 - список из 3-х заметок со всеми параметрами поиска из разных заметок. Ожидается нахождение всех заметок')
-    search_notes(notes, 'user1', 'of', 'close')
+    search_notes(notes, 'user', 'close')
+    print('7 - список из 3-х заметок со всеми параметрами поиска. Ожидается нахождение заметки №2')
+    search_notes(notes, 'of', 'inproc')
