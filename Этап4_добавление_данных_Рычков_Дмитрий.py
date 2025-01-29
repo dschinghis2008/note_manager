@@ -22,9 +22,6 @@ try:
              'issue_date': datetime.datetime.strptime('20.01.25', '%d.%m.%y').date()}
         ]
         save_notes_to_file(notes, file)
-except FileExistsError:
+except FileNotFoundError:
     print(f'{file} не найден, будет создан пустой файл')
     save_notes_to_file(notes, file)
-finally:
-    if not file.closed:
-        file.close()

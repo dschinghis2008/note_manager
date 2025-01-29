@@ -8,7 +8,7 @@ from .update_note_function import update_note
 
 
 def menu():
-    now = datetime.datetime.now()
+    now = datetime.datetime.now().date()
 
     notes = [
         {'id': '1', 'username': 'user1', 'title': 'grade1', 'content': 'step 3', 'status': 'none',
@@ -23,7 +23,7 @@ def menu():
 
     while cmd != '6':
         cmd = input('Менеджер заметок\nВыберите:\n1 - для добавления новой заметки\n2 - для просмотра списка заметок' +
-             '\n3 - для редактирования заметки\n4 - для удаления заметки\n5 - для поиска заметки\n6 - для выхода\n')
+                    '\n3 - для редактирования заметки\n4 - для удаления заметки\n5 - для поиска заметки\n6 - для выхода\n')
         if cmd == '1':
             notes.append(create_note(id_note))
             id_note += 1
@@ -32,8 +32,7 @@ def menu():
             display_notes(notes)
 
         elif cmd == '3':
-            id_range = len(notes)
-            if id_range == 0:
+            if not notes:
                 print('Нет сохраненных заметок')
                 continue
             else:

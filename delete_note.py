@@ -10,7 +10,7 @@ def delete_note(del_type, del_str, notes):
     index_for_remove = 0
     for n in notes:
         if del_type == '1':
-            if n['user'].upper() == del_str.upper():
+            if n['username'].upper() == del_str.upper():
                 set_for_remove.add(index_for_remove)
         if del_type == '2':
             if n['title'].upper() == del_str.upper():

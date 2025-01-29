@@ -1,5 +1,7 @@
-from .load_notes_from_file_function import load_notes_from_file as load
-from .save_notes_to_file_function import save_notes_to_file as save
+from .load_notes_from_file_function import load_notes_from_file as load_notes
+from .save_notes_to_file_function import save_notes_to_file as save_notes
+from .append_notes_to_file import save_notes_to_file as append_notes
+from .save_notes_json import save_notes_json as save_json
 import datetime
 
 def print_notes(notes):
