@@ -19,7 +19,6 @@ def upd_issue_date(dt):
 
 
 def update_note(note):
-    value = ''
     check_field = False
     print('Доступны для обновления следующие поля с их содержимым:')
 

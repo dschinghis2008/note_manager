@@ -14,6 +14,7 @@ def print_dict(n):
 
 
 def search_notes(notes, keyword=None, status=None):
+    result_list = []
     if not notes:
         return print('Нет сохраненных заметок')
     if keyword is not None or status is not None:
@@ -24,6 +25,8 @@ def search_notes(notes, keyword=None, status=None):
         for n in notes:
             if keyword in n['title'] or keyword in n['username'] or keyword in n['content'] or status == n['status']:
                 print_dict(n)
+                result_list.append(n)
+        return result_list
     else:
         for n in notes:
             print_dict(n)
@@ -47,7 +50,10 @@ if __name__ == '__main__':
     print('2 - список из 3-х заметок с пустыми keyword и статуса')
     search_notes(notes)
     print('3 - список из 3-х заметок с пустой строкой статуса. Ожидается нахождение заметки №2')
-    search_notes(notes, 'user2')
+    n1=search_notes(notes, 'user2')
+
+    print('--==>>>>>>',n1[0])
+
     print('4 - список из 3-х заметок с пустой строкой keyword. Ожидается нахождение заметки №1')
     search_notes(notes, status='none')
     print('5 - список из 3-х заметок со всеми параметрами поиска. Ожидается нахождение заметки №3')

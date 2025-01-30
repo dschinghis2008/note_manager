@@ -32,15 +32,27 @@ class UnitTestNoteManager(unittest.TestCase):
         self.assertFalse(check_status('None'))
 
     def test_create_note(self):
-        new_notes=notes.copy()
+        new_notes = notes.copy()
         len_before = len(new_notes)
         new_notes.append(create_note(100))
         self.assertTrue(len_before + 1 == len(new_notes))
 
     def test_delete_note(self):
-        len_before = len(notes)
-        delete_note('1','user1', notes)
-        self.assertTrue(len(notes) == len_before - 1)
+        new_notes = notes.copy()
+        len_before = len(new_notes)
+        delete_note('1', 'user1', new_notes)
+        self.assertTrue(len(new_notes) == len_before - 1)
+
+    def test_search_notes(self):
+        test_list = search_notes(notes, 'user1')
+        self.assertEqual(notes[0], test_list[0])
+        test_list = search_notes(notes, '4', 'close')
+        self.assertEqual(notes[1:3], test_list[0:2])
+
+    def test_update_note(self):
+        new_list = notes.copy()
+        self.assertRaises(Exception, update_note(new_list[0]))
+
 
 if __name__ == '__main__':
     unittest.main()
