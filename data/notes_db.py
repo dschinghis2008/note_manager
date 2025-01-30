@@ -58,6 +58,28 @@ def load_from_db():
     finally:
         con.close()
 
+def search_notes_by_keyword(keyword, db_path):
+    con = sqlite3.connect(db_path)
+    cur = con.cursor()
+    cur.execute('select * from notes where title like ? or content like ?',
+                (f'%{keyword}%', f'%{keyword}%'))
+    rows = cur.fetchall()
+    con.close()
+    return [
+        {'id': row[0], 'username': row[1], 'title': row[2], 'content': row[3], 'status': row[4], 'created_date': row[5],
+         'issue_date': row[6]} for row in rows]
+
+def filter_notes_by_status(status, db_path):
+    try:
+        con = sqlite3.connect(db_path)
+        cur = con.cursor()
+        cur.execute('select * from notes where status = ?',(status,))
+        rows = cur.fetchall()
+        return [
+        {'id': row[0], 'username': row[1], 'title': row[2], 'content': row[3], 'status': row[4], 'created_date': row[5],
+         'issue_date': row[6]} for row in rows]
+    finally:
+        con.close()
 
 print('--==>> SAVE TO DB')
 for n in notes:
@@ -81,3 +103,8 @@ print_notes(load_from_db())
 print('--==>> DELETE FROM DB')
 delete_note(3, 'db_note.db')
 print_notes(load_from_db())
+
+print(search_notes_by_keyword('4','db_note.db'))
+print(filter_notes_by_status('close','db_note.db'))
+
+
