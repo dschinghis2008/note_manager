@@ -1,6 +1,6 @@
 import sqlite3
 
-from data import notes, print_notes
+from data import print_notes
 
 
 def update_note(id, upd_dict, path_db):
@@ -24,21 +24,23 @@ def delete_note(id, path_db):
         con.close()
 
 
-def save_to_db(note):
+def save_to_db(note, db_path):
     try:
-        con = sqlite3.connect('db_note.db')
+        con = sqlite3.connect(db_path)
         cur = con.cursor()
         cur.execute("""insert into notes values(?,?,?,?,?,?,?);""",
                     (note['id'], note['username'], note['title'], note['content'], note['status'],
                      note['created_date'], note['issue_date']))
         con.commit()
+    except Exception as e:
+        print(e)
     finally:
         con.close()
 
 
-def load_from_db():
+def load_from_db(db_path):
     try:
-        con = sqlite3.connect('db_note.db')
+        con = sqlite3.connect(db_path)
         cur = con.cursor()
         cur.execute('select * from notes')
         rows = cur.fetchall()
@@ -55,6 +57,8 @@ def load_from_db():
                  }
             )
         return notes
+    except Exception as e:
+        print(e)
     finally:
         con.close()
 
@@ -81,30 +85,7 @@ def filter_notes_by_status(status, db_path):
     finally:
         con.close()
 
-print('--==>> SAVE TO DB')
-for n in notes:
-    try:
-        save_to_db(n)
-    except sqlite3.IntegrityError as e:
-        print(e)
-        continue
-
-print('--==>> LOAD FROM DB')
-print_notes(load_from_db())
-
-notes[0]['title'] = 'тест апдейта'
-notes[0]['content'] = 'тест апдейта'
-notes[0]['status'] = 'тест апдейта'
-notes[0]['issue_date'] = '28.02.2025'
-update_note(1, notes[0], 'db_note.db')
-print('--==>> UPDATE DB')
-print_notes(load_from_db())
-
-print('--==>> DELETE FROM DB')
-delete_note(3, 'db_note.db')
-print_notes(load_from_db())
-
-print(search_notes_by_keyword('4','db_note.db'))
-print(filter_notes_by_status('close','db_note.db'))
+if __name__ == '__main__':
+    delete_note(1,'db_note.db')
 
 
